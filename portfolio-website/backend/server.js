@@ -48,9 +48,7 @@ if (!fs.existsSync(CONTACTS_FILE)) {
  * In production, replace `origin` with your actual domain.
  */
 app.use(cors({
-    origin: ['http://localhost:3000', 'http://127.0.0.1:3000',
-        'http://localhost:5500', 'http://127.0.0.1:5500',
-        'null'],   // 'null' covers file:// origin when opening index.html directly
+    origin: ['*'],   // 'null' covers file:// origin when opening index.html directly
     methods: ['GET', 'POST', 'OPTIONS'],
     allowedHeaders: ['Content-Type'],
 }));
