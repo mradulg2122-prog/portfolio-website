@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AI Developer Portfolio — Building intelligent systems and web applications." />
+  <title>Mradul Gaur | AI Developer Portfolio</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap"
+    rel="stylesheet" />
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Profile Card styles -->
+  <link rel="stylesheet" href="ProfileCard.css" />
+
+  <!-- Three.js CDN (global THREE object) - required for threejs-hero.js -->
+  <script src="https://unpkg.com/three@0.152.2/build/three.min.js"></script>
+</head>
+
+<body>
+
+  <!-- ====== NAVIGATION ====== -->
+  <!-- Three.js full-page WebGL canvas — fixed behind all content -->
+  <canvas id="threejs-canvas" aria-hidden="true"></canvas>
+
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <!-- Logo / Brand -->
+      <a href="#hero" class="nav-logo">
+        <span class="logo-bracket">&lt;</span>Mradul<span class="logo-dot">.</span>dev<span
+          class="logo-bracket">/&gt;</span>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+
+      <!-- Dark/Light Mode Toggle -->
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
+        <i class="fas fa-moon" id="themeIcon"></i>
+      </button>
+
+      <!-- Mobile Hamburger Menu -->
+      <button class="hamburger" id="hamburger" aria-label="Open navigation menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <ul>
+        <li><a href="#about" class="mobile-link">About</a></li>
+        <li><a href="#skills" class="mobile-link">Skills</a></li>
+        <li><a href="#projects" class="mobile-link">Projects</a></li>
+        <li><a href="#contact" class="mobile-link">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ====== HERO SECTION ====== -->
+  <section class="hero" id="hero">
+
+    <div class="hero-container">
+      <!-- Left: Text Content -->
+      <div class="hero-content" data-aos="fade-right">
+        <p class="hero-greeting">👋 Hello, World! I'm</p>
+        <h1 class="hero-name">Mradul <span class="highlight">Gaur</span></h1>
+        <div class="hero-role">
+          <span class="role-prefix">I build</span>
+          <span class="role-text" id="typingText"></span>
+          <span class="cursor">|</span>
+        </div>
+        <p class="hero-intro">
+          Passionate AI Developer crafting intelligent systems, machine learning models,
+          and full-stack web applications that solve real-world problems.
+        </p>
+        <div class="hero-buttons">
+          <a href="#projects" class="btn btn-primary">
+            <i class="fas fa-rocket"></i> View My Work
+          </a>
+          <a href="#contact" class="btn btn-outline">
+            <i class="fas fa-envelope"></i> Hire Me
+          </a>
+        </div>
+        <!-- Quick stats -->
+        <div class="hero-stats">
+          <div class="stat">
+            <span class="stat-number">3+</span>
+            <span class="stat-label">Years Exp.</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <span class="stat-number">20+</span>
+            <span class="stat-label">Projects</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <span class="stat-number">10+</span>
+            <span class="stat-label">Clients</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Animated Profile Card -->
+      <div class="hero-image" data-aos="fade-left">
+        <iframe src="profile-card.html" style="border:none;width:100%;height:700px;"></iframe>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <a href="#about" class="scroll-indicator" aria-label="Scroll down">
+      <div class="mouse">
+        <div class="wheel"></div>
+      </div>
+      <span>Scroll Down</span>
+    </a>
+  </section>
+
+  <!-- ====== ABOUT SECTION ====== -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <span class="section-badge">01. About Me</span>
+        <h2 class="section-title">Who I Am</h2>
+        <div class="title-underline"></div>
+      </div>
+
+      <div class="about-grid">
+        <!-- About text -->
+        <div class="about-text" data-aos="fade-right">
+          <p>
+            I'm <strong>Mradul Gaur</strong>, an <strong>AI Developer</strong> and <strong>Full-Stack Engineer</strong>
+            with a deep passion for building systems that think. I thrive at the intersection of
+            <em>artificial intelligence</em>, <em>data science</em>, and <em>modern web development</em>.
+          </p>
+          <p>
+            My journey began with a fascination for how machines can learn from data. Today, I design
+            and deploy end-to-end solutions — from training neural networks to building polished
+            user interfaces.
+          </p>
+          <p>
+            When I'm not coding, I'm reading AI research papers, contributing to open-source
+            projects, or exploring the latest advancements in Large Language Models and Generative AI.
+          </p>
+
+          <!-- Info grid -->
+          <div class="about-info">
+            <div class="info-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Mathura, Uttar Pradesh</span>
+            </div>
+            <div class="info-item">
+              <i class="fas fa-graduation-cap"></i>
+              <span>B.Tech Computer Science Specialization in AI and Machine Learning</span>
+            </div>
+            <div class="info-item">
+              <i class="fas fa-briefcase"></i>
+              <span>Open to Opportunities</span>
+            </div>
+            <div class="info-item">
+              <i class="fas fa-code"></i>
+              <span>Full-Stack + AI/ML</span>
+            </div>
+          </div>
+
+          <a href="#contact" class="btn btn-primary" style="margin-top: 1.5rem; display: inline-flex;">
+            <i class="fas fa-download"></i> Get in Touch
+          </a>
+        </div>
+
+        <!-- About Profile Card -->
+        <div class="about-card-wrap" data-aos="fade-left">
+          <div class="profile-card">
+
+            <!-- Glow background -->
+            <div class="pc-glow"></div>
+
+            <!-- Avatar + status -->
+            <div class="pc-avatar-wrap">
+              <div class="pc-avatar">
+                <i class="fas fa-user-astronaut"></i>
+              </div>
+              <div class="pc-status">
+                <span class="pc-status-dot"></span>
+                Available for Work
+              </div>
+            </div>
+
+            <!-- Name & Role -->
+            <div class="pc-identity">
+              <h3 class="pc-name">Mradul Gaur</h3>
+              <p class="pc-role">AI Developer &amp; Full-Stack Engineer</p>
+            </div>
+
+            <!-- Divider -->
+            <div class="pc-divider"></div>
+
+            <!-- Stats row -->
+            <div class="pc-stats">
+              <div class="pc-stat">
+                <span class="pc-stat-num">3+</span>
+                <span class="pc-stat-label">Years Exp.</span>
+              </div>
+              <div class="pc-stat-sep"></div>
+              <div class="pc-stat">
+                <span class="pc-stat-num">20+</span>
+                <span class="pc-stat-label">Projects</span>
+              </div>
+              <div class="pc-stat-sep"></div>
+              <div class="pc-stat">
+                <span class="pc-stat-num">10+</span>
+                <span class="pc-stat-label">Clients</span>
+              </div>
+            </div>
+
+            <!-- Divider -->
+            <div class="pc-divider"></div>
+
+            <!-- Social buttons -->
+            <div class="pc-social-btns">
+              <a href="https://github.com/mradulg2122-prog" target="_blank" rel="noopener" class="pc-btn pc-btn-gh">
+                <i class="fab fa-github"></i> GitHub
+              </a>
+              <a href="https://www.linkedin.com/in/mradul-gaur-67a713329/" target="_blank" rel="noopener"
+                class="pc-btn pc-btn-li">
+                <i class="fab fa-linkedin"></i> LinkedIn
+              </a>
+            </div>
+
+            <!-- Email link -->
+            <a href="mailto:mradulg2122@gmail.com" class="pc-email">
+              <i class="fas fa-envelope"></i> mradulg2122@gmail.com
+            </a>
+
+          </div><!-- end profile-card -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== SKILLS SECTION ====== -->
+  <section class="skills" id="skills">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <span class="section-badge">02. Skills</span>
+        <h2 class="section-title">Tech Stack</h2>
+        <div class="title-underline"></div>
+        <p class="section-subtitle">Technologies I work with professionally</p>
+      </div>
+
+      <div class="skills-grid" data-aos="fade-up" data-aos-delay="100">
+
+        <!-- Skill Card: Python -->
+        <div class="skill-card" data-aos="zoom-in" data-aos-delay="100">
+          <div class="skill-icon python">
+            <i class="fab fa-python"></i>
+          </div>
+          <h3 class="skill-name">Python</h3>
+          <p class="skill-desc">NumPy, Pandas, Scikit-learn, FastAPI, Django</p>
+          <div class="skill-bar">
+            <div class="skill-fill" data-width="95"></div>
+          </div>
+          <span class="skill-percent">95%</span>
+        </div>
+
+        <!-- Skill Card: AI / Machine Learning -->
+        <div class="skill-card" data-aos="zoom-in" data-aos-delay="150">
+          <div class="skill-icon ai">
+            <i class="fas fa-brain"></i>
+          </div>
+          <h3 class="skill-name">Machine Learning</h3>
+          <p class="skill-desc">TensorFlow, PyTorch, Keras, Scikit-learn</p>
+          <div class="skill-bar">
+            <div class="skill-fill" data-width="90"></div>
+          </div>
+          <span class="skill-percent">90%</span>
+        </div>
+
+        <!-- Skill Card: Deep Learning / AI -->
+        <div class="skill-card" data-aos="zoom-in" data-aos-delay="200">
+          <div class="skill-icon deep-ai">
+            <i class="fas fa-microchip"></i>
+          </div>
+          <h3 class="skill-name">Artificial Intelligence</h3>
+          <p class="skill-desc">LLMs, NLP, Computer Vision, Generative AI</p>
+          <div class="skill-bar">
+            <div class="skill-fill" data-width="88"></div>
+          </div>
+          <span class="skill-percent">88%</span>
+        </div>
+
+        <!-- Skill Card: JavaScript -->
+        <div class="skill-card" data-aos="zoom-in" data-aos-delay="250">
+          <div class="skill-icon js">
+            <i class="fab fa-js-square"></i>
+          </div>
+          <h3 class="skill-name">JavaScript</h3>
+          <p class="skill-desc">ES6+, TypeScript, React, Next.js, Vue</p>
+          <div class="skill-bar">
+            <div class="skill-fill" data-width="92"></div>
+          </div>
+          <span class="skill-percent">92%</span>
+        </div>
+
+        <!-- Skill Card: Node.js -->
+        <div class="skill-card" data-aos="zoom-in" data-aos-delay="300">
+          <div class="skill-icon node">
+            <i class="fab fa-node-js"></i>
+          </div>
+          <h3 class="skill-name">Node.js</h3>
+          <p class="skill-desc">Express, REST APIs, GraphQL, Socket.io</p>
+          <div class="skill-bar">
+            <div class="skill-fill" data-width="87"></div>
+          </div>
+          <span class="skill-percent">87%</span>
+        </div>
+
+        <!-- Skill Card: Web Development -->
+        <div class="skill-card" data-aos="zoom-in" data-aos-delay="350">
+          <div class="skill-icon web">
+            <i class="fas fa-globe"></i>
+          </div>
+          <h3 class="skill-name">Web Development</h3>
+          <p class="skill-desc">HTML5, CSS3, Responsive Design, Animations</p>
+          <div class="skill-bar">
+            <div class="skill-fill" data-width="93"></div>
+          </div>
+          <span class="skill-percent">93%</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== PROJECTS SECTION ====== -->
+  <section class="projects" id="projects">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <span class="section-badge">03. Projects</span>
+        <h2 class="section-title">Featured Work</h2>
+        <div class="title-underline"></div>
+        <p class="section-subtitle">A selection of my best projects</p>
+      </div>
+
+      <div class="projects-grid">
+
+        <!-- Project Card 1: AI Chatbot -->
+        <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="project-image">
+            <div class="project-img-placeholder ai-bg">
+              <i class="fas fa-comment-dots"></i>
+            </div>
+            <div class="project-overlay">
+              <div class="project-tags">
+                <span class="tag">Python</span>
+                <span class="tag">LLM</span>
+                <span class="tag">FastAPI</span>
+              </div>
+            </div>
+          </div>
+          <div class="project-content">
+            <div class="project-number">01</div>
+            <h3 class="project-title">AI Conversational Assistant</h3>
+            <p class="project-desc">
+              A production-grade AI chatbot powered by a fine-tuned LLM with semantic search,
+              memory, and multi-turn conversation. Features a React front-end with real-time
+              streaming responses via WebSockets.
+            </p>
+            <div class="project-links">
+              <a href="#" class="project-btn btn-primary-sm">
+                <i class="fab fa-github"></i> GitHub
+              </a>
+              <a href="#" class="project-btn btn-outline-sm">
+                <i class="fas fa-external-link-alt"></i> Live Demo
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project Card 2: ML Prediction System -->
+        <div class="project-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="project-image">
+            <div class="project-img-placeholder ml-bg">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <div class="project-overlay">
+              <div class="project-tags">
+                <span class="tag">TensorFlow</span>
+                <span class="tag">Scikit-learn</span>
+                <span class="tag">React</span>
+              </div>
+            </div>
+          </div>
+          <div class="project-content">
+            <div class="project-number">02</div>
+            <h3 class="project-title">Stock Market Prediction Engine</h3>
+            <p class="project-desc">
+              LSTM-based time-series forecasting model with 87% accuracy on S&P 500 data.
+              Includes an interactive dashboard for visualizing predictions, confidence
+              intervals, and feature importance.
+            </p>
+            <div class="project-links">
+              <a href="#" class="project-btn btn-primary-sm">
+                <i class="fab fa-github"></i> GitHub
+              </a>
+              <a href="#" class="project-btn btn-outline-sm">
+                <i class="fas fa-external-link-alt"></i> Live Demo
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project Card 3: Computer Vision App -->
+        <div class="project-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="project-image">
+            <div class="project-img-placeholder cv-bg">
+              <i class="fas fa-eye"></i>
+            </div>
+            <div class="project-overlay">
+              <div class="project-tags">
+                <span class="tag">PyTorch</span>
+                <span class="tag">OpenCV</span>
+                <span class="tag">Node.js</span>
+              </div>
+            </div>
+          </div>
+          <div class="project-content">
+            <div class="project-number">03</div>
+            <h3 class="project-title">Real-Time Object Detection</h3>
+            <p class="project-desc">
+              Custom-trained YOLOv8 model for real-time object detection in video streams,
+              achieving 60+ FPS. Features a web-based dashboard for live monitoring, alerts,
+              and analytics.
+            </p>
+            <div class="project-links">
+              <a href="#" class="project-btn btn-primary-sm">
+                <i class="fab fa-github"></i> GitHub
+              </a>
+              <a href="#" class="project-btn btn-outline-sm">
+                <i class="fas fa-external-link-alt"></i> Live Demo
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project Card 4: NLP Sentiment Analyzer -->
+        <div class="project-card" data-aos="fade-up" data-aos-delay="400">
+          <div class="project-image">
+            <div class="project-img-placeholder nlp-bg">
+              <i class="fas fa-language"></i>
+            </div>
+            <div class="project-overlay">
+              <div class="project-tags">
+                <span class="tag">BERT</span>
+                <span class="tag">HuggingFace</span>
+                <span class="tag">Flask</span>
+              </div>
+            </div>
+          </div>
+          <div class="project-content">
+            <div class="project-number">04</div>
+            <h3 class="project-title">NLP Sentiment Analyzer</h3>
+            <p class="project-desc">
+              Fine-tuned BERT model for multi-class sentiment analysis on social media data,
+              achieving 94% F1-score. REST API endpoints with batch processing and confidence
+              scoring.
+            </p>
+            <div class="project-links">
+              <a href="#" class="project-btn btn-primary-sm">
+                <i class="fab fa-github"></i> GitHub
+              </a>
+              <a href="#" class="project-btn btn-outline-sm">
+                <i class="fas fa-external-link-alt"></i> Live Demo
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- end projects-grid -->
+    </div>
+  </section>
+
+  <!-- ====== CONTACT SECTION ====== -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <span class="section-badge">04. Contact</span>
+        <h2 class="section-title">Let's Connect</h2>
+        <div class="title-underline"></div>
+        <p class="section-subtitle">Have a project in mind? I'd love to hear about it.</p>
+      </div>
+
+      <div class="contact-grid">
+
+        <!-- Contact Info Cards -->
+        <div class="contact-info" data-aos="fade-right">
+          <h3 class="contact-heading">Get in Touch</h3>
+          <p class="contact-text">
+            Whether you have a question, a project proposal, or just want to say hello —
+            my inbox is always open. I'll get back to you within 24 hours.
+          </p>
+
+          <div class="contact-cards">
+            <div class="contact-card">
+              <div class="contact-card-icon">
+                <i class="fas fa-envelope"></i>
+              </div>
+              <div>
+                <span class="contact-card-label">Email</span>
+                <span class="contact-card-value">mradulg2122@gmail.com</span>
+              </div>
+            </div>
+            <div class="contact-card">
+              <div class="contact-card-icon">
+                <i class="fas fa-map-marker-alt"></i>
+              </div>
+              <div>
+                <span class="contact-card-label">Location</span>
+                <span class="contact-card-value">Mathura, Uttar Pradesh</span>
+              </div>
+            </div>
+            <div class="contact-card">
+              <div class="contact-card-icon">
+                <i class="fas fa-clock"></i>
+              </div>
+              <div>
+                <span class="contact-card-label">Availability</span>
+                <span class="contact-card-value">Open to Work</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Social Links in Contact section -->
+          <div class="contact-social">
+            <a href="https://github.com/mradulg2122-prog" target="_blank" rel="noopener" class="social-link"
+              aria-label="GitHub">
+              <i class="fab fa-github"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/mradul-gaur-67a713329/" target="_blank" rel="noopener"
+              class="social-link" aria-label="LinkedIn">
+              <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="mailto:mradulg2122@gmail.com" class="social-link" aria-label="Email">
+              <i class="fas fa-envelope"></i>
+            </a>
+            <a href="https://twitter.com" target="_blank" rel="noopener" class="social-link" aria-label="Twitter">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="contact-form-wrap" data-aos="fade-left">
+          <form class="contact-form" id="contactForm" novalidate>
+
+            <!-- Name Field -->
+            <div class="form-group">
+              <label for="name" class="form-label">Full Name</label>
+              <div class="input-wrap">
+                <i class="fas fa-user input-icon"></i>
+                <input type="text" id="name" name="name" class="form-input" placeholder="John Doe"
+                  autocomplete="name" />
+              </div>
+              <span class="field-error" id="nameError"></span>
+            </div>
+
+            <!-- Email Field -->
+            <div class="form-group">
+              <label for="email" class="form-label">Email Address</label>
+              <div class="input-wrap">
+                <i class="fas fa-envelope input-icon"></i>
+                <input type="email" id="email" name="email" class="form-input" placeholder="john@example.com"
+                  autocomplete="email" />
+              </div>
+              <span class="field-error" id="emailError"></span>
+            </div>
+
+            <!-- Subject Field -->
+            <div class="form-group">
+              <label for="subject" class="form-label">Subject</label>
+              <div class="input-wrap">
+                <i class="fas fa-tag input-icon"></i>
+                <input type="text" id="subject" name="subject" class="form-input" placeholder="Project Inquiry" />
+              </div>
+              <span class="field-error" id="subjectError"></span>
+            </div>
+
+            <!-- Message Field -->
+            <div class="form-group">
+              <label for="message" class="form-label">Message</label>
+              <div class="input-wrap textarea-wrap">
+                <i class="fas fa-comment-alt input-icon textarea-icon"></i>
+                <textarea id="message" name="message" class="form-input form-textarea"
+                  placeholder="Tell me about your project..." rows="5"></textarea>
+              </div>
+              <span class="field-error" id="messageError"></span>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary btn-full" id="submitBtn">
+              <span class="btn-text">
+                <i class="fas fa-paper-plane"></i> Send Message
+              </span>
+              <span class="btn-loading" style="display: none;">
+                <i class="fas fa-spinner fa-spin"></i> Sending...
+              </span>
+            </button>
+
+            <!-- Success / Error Alert -->
+            <div class="form-alert" id="formAlert" style="display: none;" role="alert"></div>
+
+          </form>
+        </div><!-- end contact-form-wrap -->
+
+      </div><!-- end contact-grid -->
+    </div>
+  </section>
+
+  <!-- ====== FOOTER ====== -->
+  <footer class="footer">
+    <div class="footer-container">
+
+      <div class="footer-top">
+        <!-- Brand -->
+        <div class="footer-brand">
+          <span class="logo-bracket">&lt;</span>Mradul<span class="logo-dot">.</span>dev<span
+            class="logo-bracket">/&gt;</span>
+          <p class="footer-tagline">Building AI that matters.</p>
+        </div>
+
+        <!-- Footer Nav Links -->
+        <nav class="footer-nav" aria-label="Footer Navigation">
+          <a href="#about">About</a>
+          <a href="#skills">Skills</a>
+          <a href="#projects">Projects</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+        <!-- Social Links -->
+        <div class="footer-social">
+          <a href="https://github.com/mradulg2122-prog" target="_blank" rel="noopener" aria-label="GitHub">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/mradul-gaur-67a713329/" target="_blank" rel="noopener"
+            aria-label="LinkedIn">
+            <i class="fab fa-linkedin"></i>
+          </a>
+          <a href="mailto:mradulg2122@gmail.com" aria-label="Email">
+            <i class="fas fa-envelope"></i>
+          </a>
+          <a href="https://twitter.com" target="_blank" rel="noopener" aria-label="Twitter">
+            <i class="fab fa-twitter"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>
+          &copy; <span id="currentYear"></span> Mradul Gaur. All rights reserved.
+          Made with <i class="fas fa-heart" style="color: var(--accent-pink);"></i> & lots of
+          <i class="fas fa-coffee" style="color: var(--accent-amber);"></i>
+        </p>
+        <p class="footer-credit">Designed & Built by Mradul Gaur</p>
+      </div>
+
+    </div><!-- end footer-container -->
+
+    <!-- Scroll to top button -->
+    <button class="scroll-top" id="scrollTop" aria-label="Scroll to top">
+      <i class="fas fa-chevron-up"></i>
+    </button>
+  </footer>
+
+  <!-- Main JavaScript -->
+  <script src="script.js"></script>
+
+  <!-- Three.js 3D Hero Animation -->
+  <script src="threejs-hero.js"></script>
+</body>
+
+</html>
