@@ -327,7 +327,7 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
    ========================================================= */
 
 /** Backend API URL — adjust port if needed */
-const API_URL = "https://portfolio-website-h81v.onrender.com";
+const API_URL = "https://portfolio-website-h81v.onrender.com/api/contact";
 
 const contactForm = document.getElementById('contactForm');
 const submitBtn = document.getElementById('submitBtn');
