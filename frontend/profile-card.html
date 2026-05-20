@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile Card</title>
+    <link rel="stylesheet" href="profile-card.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="pc-card-wrapper" style="
+      --icon: url(images/iconpattern.png);
+      --grain: none;
+      --inner-gradient: linear-gradient(145deg,#60496e8c 0%,#71C4FF44 100%);
+      --behind-glow-color: rgba(125, 190, 255, 0.67);
+      --behind-glow-size: 50%;
+    ">
+
+        <div class="pc-behind"></div>
+
+        <div class="pc-card-shell">
+            <section class="pc-card">
+                <div class="pc-inside">
+
+                    <div class="pc-shine"></div>
+                    <div class="pc-glare"></div>
+
+                    <div class="pc-content pc-avatar-content">
+                        <img class="avatar" src="images/Mradul4.png" alt="Mradul Gaur avatar" fetchpriority="high" />
+                    </div>
+
+                    <div class="pc-content">
+                        <div class="pc-details">
+                            <h3>Mradul Gaur</h3>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </div>
+
+    </div>
+
+    <script src="profile-card.js"></script>
+</body>
+
+</html>
