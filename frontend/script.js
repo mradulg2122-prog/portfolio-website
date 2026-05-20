@@ -450,7 +450,7 @@ contactForm.addEventListener('submit', async (e) => {
         email: fields.email.el.value,
         subject: fields.subject.el.value,
         message: fields.message.el.value,
-        time: new Date().toLocaleString()
+        
     };
 
     try {
