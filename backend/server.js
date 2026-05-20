@@ -10,6 +10,7 @@ const { body, validationResult } = require('express-validator');
 // ── App Setup ─────────────────────────────────────────────
 const app = express();
 const PORT = process.env.PORT || 5000;
+app.use(cors());
 
 // ── Paths ─────────────────────────────────────────────────
 const DATA_DIR = path.join(__dirname, 'data');
@@ -26,16 +27,16 @@ if (!fs.existsSync(CONTACTS_FILE)) {
 }
 
 // ── CORS FIX ──────────────────────────────────────────────
-app.use(cors({
-    origin: [
-        'https://mradulportfolio-three.vercel.app',
-        'http://localhost:3000',
-        'http://127.0.0.1:5500'
-    ],
-    methods: ['GET', 'POST', 'OPTIONS'],
-    allowedHeaders: ['Content-Type'],
-    credentials: true
-}));
+// app.use(cors({
+//     origin: [
+//         'https://mradulportfolio-three.vercel.app',
+//         'http://localhost:3000',
+//         'http://127.0.0.1:5500'
+//     ],
+//     methods: ['GET', 'POST', 'OPTIONS'],
+//     allowedHeaders: ['Content-Type'],
+//     credentials: true
+// }));
 
 // ── Middleware ────────────────────────────────────────────
 app.use(express.json());
