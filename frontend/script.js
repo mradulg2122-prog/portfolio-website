@@ -325,15 +325,16 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
 /* =========================================================
    CONTACT FORM — Validation + API Submission
    ========================================================= */
+   /* =========================================================
+   CONTACT FORM — EmailJS
+   ========================================================= */
 
-/** Backend API URL — adjust port if needed */
-const API_URL = "https://portfolio-website-1-wtrl.onrender.com/api/contact";
+emailjs.init("os6BVRHlAOd0_qAz6");
 
 const contactForm = document.getElementById('contactForm');
 const submitBtn = document.getElementById('submitBtn');
 const formAlert = document.getElementById('formAlert');
 
-/* --- Field references --- */
 const fields = {
     name: { el: document.getElementById('name'), errorEl: document.getElementById('nameError') },
     email: { el: document.getElementById('email'), errorEl: document.getElementById('emailError') },
@@ -341,24 +342,25 @@ const fields = {
     message: { el: document.getElementById('message'), errorEl: document.getElementById('messageError') },
 };
 
-/* --- Validation rules --- */
 const validators = {
     name: (value) => {
         if (!value.trim()) return 'Name is required.';
         if (value.trim().length < 2) return 'Name must be at least 2 characters.';
         return '';
     },
+
     email: (value) => {
         if (!value.trim()) return 'Email is required.';
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(value)) return 'Please enter a valid email address.';
         return '';
     },
+
     subject: (value) => {
         if (!value.trim()) return 'Subject is required.';
-        if (value.trim().length < 3) return 'Subject must be at least 3 characters.';
         return '';
     },
+
     message: (value) => {
         if (!value.trim()) return 'Message is required.';
         if (value.trim().length < 10) return 'Message must be at least 10 characters.';
@@ -366,118 +368,280 @@ const validators = {
     },
 };
 
-/**
- * Validate a single field.
- * Returns true if valid, false if invalid.
- */
 function validateField(name) {
+
     const field = fields[name];
     const value = field.el.value;
     const errorMsg = validators[name](value);
 
     field.errorEl.textContent = errorMsg;
+
     field.el.classList.toggle('error', !!errorMsg);
     field.el.classList.toggle('valid', !errorMsg && value.trim() !== '');
+
     return !errorMsg;
 }
 
-/**
- * Validate all fields.
- * Returns true if all are valid.
- */
 function validateAll() {
     return Object.keys(validators).map(validateField).every(Boolean);
 }
 
-// Live validation on blur
 Object.keys(fields).forEach(name => {
+
     fields[name].el.addEventListener('blur', () => validateField(name));
+
     fields[name].el.addEventListener('input', () => {
+
         if (fields[name].el.classList.contains('error')) {
-            validateField(name); // Re-validate immediately if already errored
+            validateField(name);
         }
     });
 });
 
-/**
- * Show the form alert banner.
- * @param {'success'|'error'} type
- * @param {string} message
- */
 function showAlert(type, message) {
+
     formAlert.className = `form-alert ${type}`;
+
     formAlert.innerHTML = `
-    <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
-    ${message}
-  `;
+        <i class="fas fa-${type === 'success'
+            ? 'check-circle'
+            : 'exclamation-circle'}"></i>
+        ${message}
+    `;
+
     formAlert.style.display = 'flex';
 
-    // Auto-hide success alert after 6 seconds
     if (type === 'success') {
-        setTimeout(() => { formAlert.style.display = 'none'; }, 6000);
+
+        setTimeout(() => {
+            formAlert.style.display = 'none';
+        }, 6000);
     }
 }
 
-/** Toggle loading state on submit button */
 function setLoading(loading) {
+
     const btnText = submitBtn.querySelector('.btn-text');
     const btnLoading = submitBtn.querySelector('.btn-loading');
+
     submitBtn.disabled = loading;
+
     btnText.style.display = loading ? 'none' : 'flex';
     btnLoading.style.display = loading ? 'flex' : 'none';
 }
 
-/* --- Form submit handler --- */
 contactForm.addEventListener('submit', async (e) => {
+
     e.preventDefault();
+
     formAlert.style.display = 'none';
 
-    // Run full validation
     if (!validateAll()) {
-        showAlert('error', 'Please fix the errors above and try again.');
+
+        showAlert('error', 'Please fix the errors above.');
+
         return;
     }
 
     setLoading(true);
 
-    const payload = {
-        name: fields.name.el.value.trim(),
-        email: fields.email.el.value.trim(),
-        subject: fields.subject.el.value.trim(),
-        message: fields.message.el.value.trim(),
+    const templateParams = {
+        name: fields.name.el.value,
+        email: fields.email.el.value,
+        subject: fields.subject.el.value,
+        message: fields.message.el.value,
+        time: new Date().toLocaleString()
     };
 
     try {
-        const response = await fetch(API_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload),
+
+        await emailjs.send(
+            'service_dv3peff',
+            'template_ow2dj3m',
+            templateParams
+        );
+
+        showAlert(
+            'success',
+            '🎉 Message sent successfully!'
+        );
+
+        contactForm.reset();
+
+        Object.values(fields).forEach(f => {
+
+            f.el.classList.remove('valid', 'error');
+
+            f.errorEl.textContent = '';
         });
 
-        const data = await response.json();
+    } catch (error) {
 
-        if (response.ok) {
-            showAlert('success', '🎉 Your message was sent! I\'ll get back to you within 24 hours.');
-            contactForm.reset();
-            // Clear all valid/error states on inputs
-            Object.values(fields).forEach(f => {
-                f.el.classList.remove('valid', 'error');
-                f.errorEl.textContent = '';
-            });
-        } else {
-            showAlert('error', data.message || 'Something went wrong. Please try again.');
-        }
-    } catch (err) {
-        // Network error or server is offline
-        console.error('Contact form error:', err);
+        console.error(error);
+
         showAlert(
             'error',
-            '⚡ Could not reach the server. Make sure the backend is running on port 5000, or try again later.'
+            'Failed to send message.'
         );
+
     } finally {
+
         setLoading(false);
     }
 });
+
+// /** Backend API URL — adjust port if needed */
+// const API_URL = "https://portfolio-website-1-wtrl.onrender.com/api/contact";
+
+// const contactForm = document.getElementById('contactForm');
+// const submitBtn = document.getElementById('submitBtn');
+// const formAlert = document.getElementById('formAlert');
+
+// /* --- Field references --- */
+// const fields = {
+//     name: { el: document.getElementById('name'), errorEl: document.getElementById('nameError') },
+//     email: { el: document.getElementById('email'), errorEl: document.getElementById('emailError') },
+//     subject: { el: document.getElementById('subject'), errorEl: document.getElementById('subjectError') },
+//     message: { el: document.getElementById('message'), errorEl: document.getElementById('messageError') },
+// };
+
+// /* --- Validation rules --- */
+// const validators = {
+//     name: (value) => {
+//         if (!value.trim()) return 'Name is required.';
+//         if (value.trim().length < 2) return 'Name must be at least 2 characters.';
+//         return '';
+//     },
+//     email: (value) => {
+//         if (!value.trim()) return 'Email is required.';
+//         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+//         if (!emailRegex.test(value)) return 'Please enter a valid email address.';
+//         return '';
+//     },
+//     subject: (value) => {
+//         if (!value.trim()) return 'Subject is required.';
+//         if (value.trim().length < 3) return 'Subject must be at least 3 characters.';
+//         return '';
+//     },
+//     message: (value) => {
+//         if (!value.trim()) return 'Message is required.';
+//         if (value.trim().length < 10) return 'Message must be at least 10 characters.';
+//         return '';
+//     },
+// };
+
+// /**
+//  * Validate a single field.
+//  * Returns true if valid, false if invalid.
+//  */
+// function validateField(name) {
+//     const field = fields[name];
+//     const value = field.el.value;
+//     const errorMsg = validators[name](value);
+
+//     field.errorEl.textContent = errorMsg;
+//     field.el.classList.toggle('error', !!errorMsg);
+//     field.el.classList.toggle('valid', !errorMsg && value.trim() !== '');
+//     return !errorMsg;
+// }
+
+// /**
+//  * Validate all fields.
+//  * Returns true if all are valid.
+//  */
+// function validateAll() {
+//     return Object.keys(validators).map(validateField).every(Boolean);
+// }
+
+// // Live validation on blur
+// Object.keys(fields).forEach(name => {
+//     fields[name].el.addEventListener('blur', () => validateField(name));
+//     fields[name].el.addEventListener('input', () => {
+//         if (fields[name].el.classList.contains('error')) {
+//             validateField(name); // Re-validate immediately if already errored
+//         }
+//     });
+// });
+
+// /**
+//  * Show the form alert banner.
+//  * @param {'success'|'error'} type
+//  * @param {string} message
+//  */
+// function showAlert(type, message) {
+//     formAlert.className = `form-alert ${type}`;
+//     formAlert.innerHTML = `
+//     <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+//     ${message}
+//   `;
+//     formAlert.style.display = 'flex';
+
+//     // Auto-hide success alert after 6 seconds
+//     if (type === 'success') {
+//         setTimeout(() => { formAlert.style.display = 'none'; }, 6000);
+//     }
+// }
+
+// /** Toggle loading state on submit button */
+// function setLoading(loading) {
+//     const btnText = submitBtn.querySelector('.btn-text');
+//     const btnLoading = submitBtn.querySelector('.btn-loading');
+//     submitBtn.disabled = loading;
+//     btnText.style.display = loading ? 'none' : 'flex';
+//     btnLoading.style.display = loading ? 'flex' : 'none';
+// }
+
+// /* --- Form submit handler --- */
+// contactForm.addEventListener('submit', async (e) => {
+//     e.preventDefault();
+//     formAlert.style.display = 'none';
+
+//     // Run full validation
+//     if (!validateAll()) {
+//         showAlert('error', 'Please fix the errors above and try again.');
+//         return;
+//     }
+
+//     setLoading(true);
+
+//     const payload = {
+//         name: fields.name.el.value.trim(),
+//         email: fields.email.el.value.trim(),
+//         subject: fields.subject.el.value.trim(),
+//         message: fields.message.el.value.trim(),
+//     };
+
+//     try {
+//         const response = await fetch(API_URL, {
+//             method: 'POST',
+//             headers: { 'Content-Type': 'application/json' },
+//             body: JSON.stringify(payload),
+//         });
+
+//         const data = await response.json();
+
+//         if (response.ok) {
+//             showAlert('success', '🎉 Your message was sent! I\'ll get back to you within 24 hours.');
+//             contactForm.reset();
+//             // Clear all valid/error states on inputs
+//             Object.values(fields).forEach(f => {
+//                 f.el.classList.remove('valid', 'error');
+//                 f.errorEl.textContent = '';
+//             });
+//         } else {
+//             showAlert('error', data.message || 'Something went wrong. Please try again.');
+//         }
+//     } catch (err) {
+//         // Network error or server is offline
+//         console.error('Contact form error:', err);
+//         showAlert(
+//             'error',
+//             '⚡ Could not reach the server. Make sure the backend is running on port 5000, or try again later.'
+//         );
+//     } finally {
+//         setLoading(false);
+//     }
+// });
 
 /* =========================================================
    SMOOTH SCROLL for all anchor links
