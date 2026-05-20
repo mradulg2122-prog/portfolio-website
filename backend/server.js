@@ -13,10 +13,17 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 app.use(cors());
 const transporter = nodemailer.createTransport({
-    service: 'gmail',
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: false,
+    
     auth: {
         user: 'mradulg2122@gmail.com',
         pass: 'keuylewtsmkxzyvs'
+    },
+
+    tls: {
+        rejectUnauthorized: false
     }
 });
 
