@@ -1,6 +1,7 @@
 'use strict';
 
 // ── Imports ───────────────────────────────────────────────
+const nodemailer = require('nodemailer');
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
@@ -11,6 +12,13 @@ const { body, validationResult } = require('express-validator');
 const app = express();
 const PORT = process.env.PORT || 5000;
 app.use(cors());
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: 'mradulg2122@gmail.com',
+        pass: 'keuylewtsmkxzyvs'
+    }
+});
 
 // ── Paths ─────────────────────────────────────────────────
 const DATA_DIR = path.join(__dirname, 'data');
@@ -172,7 +180,7 @@ app.post(
             .isLength({ min: 10, max: 3000 }),
     ],
 
-    (req, res) => {
+    async (req, res) => {
 
         const errors = validationResult(req);
 
@@ -204,6 +212,21 @@ app.post(
             saveContacts(contacts);
 
             console.log(`New Contact Saved: ${name}`);
+            await transporter.sendMail({
+    from: 'mradulg2122@gmail.com',
+    to: 'mradulg2122@gmail.com',
+    subject: `New Portfolio Message: ${subject}`,
+    html: `
+        <h2>New Contact Form Submission</h2>
+
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Subject:</strong> ${subject}</p>
+        <p><strong>Message:</strong></p>
+
+        <p>${message}</p>
+    `
+});
 
             return res.status(201).json({
                 success: true,
